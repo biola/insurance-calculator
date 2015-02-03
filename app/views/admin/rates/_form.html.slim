@@ -1,0 +1,37 @@
+.panel.panel-default.slim-panel
+  .panel-body
+    = form_for [:admin, @rate], html: { class: 'form-horizontal'} do |f|
+      - if @rate.errors.any?
+        #error_explanation.alert.alert-danger
+          h2= "#{pluralize(@rate.errors.count, "error")} prohibited this rate from being saved:"
+          ul
+            - @rate.errors.full_messages.each do |message|
+              li= message
+      .form-group
+        = f.label :min_age, class: 'col-sm-4 control-label'
+        .col-sm-6
+          = f.text_field :min_age, class: 'form-control'
+
+      .form-group
+        = f.label :max_age, class: 'col-sm-4 control-label'
+        .col-sm-6
+          = f.text_field :max_age, class: 'form-control'
+
+      .form-group
+        = f.label :percentage, class: 'col-sm-4 control-label'
+        .col-sm-6
+          = f.text_field :percentage, class: 'form-control'
+
+      .form-group
+        = f.label :person_type, class: 'col-sm-4 control-label'
+        .col-sm-6
+          = select_tag :person_type, options_for_select([['Employee','Employee'],['Spouse','Spouse']], selected: @rate.person_type), class: 'form-control'
+
+      .form-group
+        = f.label :smoking, class: 'col-sm-4 control-label'
+        .col-sm-6
+          = select_tag :smoking, options_for_select([['Yes',true],['No',false]], selected: @rate.smoking), class: 'form-control'
+
+      .form-group
+        .col-sm-10
+          =submit_tag 'Submit', class: 'btn btn-primary pull-right'

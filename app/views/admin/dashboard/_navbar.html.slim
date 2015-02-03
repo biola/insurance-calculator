@@ -1,0 +1,27 @@
+.container-fluid
+  .row
+    .col-sm-3.col-md-2#sidebar
+      ul.nav.nav-sidebar
+        li class=(page == :rates ? "active" : "inactive")
+          = link_to admin_rates_path do
+            strong Rates
+          end
+        li class=(page == :multiple_rates ? "active" : "inactive")
+          = link_to multiple_edit_admin_rates_path do
+            strong Edit Multiple Rates
+          end
+        li class=(page == :coverages ? "active" : "inactive")
+          = link_to admin_coverages_path do
+            strong Coverages
+          end
+        li class=(page == :child_coverages ? "active" : "inactive")
+          = link_to admin_child_coverages_path do
+            strong Child Coverages
+          end
+      .text-center
+        = link_to('#', onclick: 'javascript:window.open("/", "_blank", "scrollbars=0,resizable=0,toolbar=0,menubar=0,height=550,width=430")', title: 'Insurance Calculator', class: "btn btn-default", id: "calc-button") do
+          strong Open Calculator
+          | &nbsp; &nbsp;
+          i class="fa fa-calculator"
+        end
+

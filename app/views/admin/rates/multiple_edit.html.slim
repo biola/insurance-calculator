@@ -1,0 +1,53 @@
+= render 'admin/dashboard/navbar', page: :multiple_rates
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+  h3
+    strong Edit Mutiple Rates
+  .panel.panel-default.multiple-edit
+    .panel-body
+      table.table.table-striped
+        thead
+          tr
+            th &nbsp;
+            th &nbsp;
+            - @age_ranges.each do |age_range|
+              th.text-center= age_range
+        tbody
+          tr
+            = form_tag multiple_update_admin_rates_path do
+              td Employee
+              td Non-Tobacco
+              - @non_smoking_employees_rates.each do |rate|
+                = fields_for "rates[]", rate do |rf|
+                  td= rf.text_field :percentage, maxlength: "5", size: "6", class: 'form-control'
+              td= submit_tag "Update", class: 'btn btn-primary btn-sm'
+          tr
+            = form_tag multiple_update_admin_rates_path do
+              td Employee
+              td Tobacco
+              - @smoking_employees_rates.each do |rate|
+                = fields_for "rates[]", rate do |rf|
+                  td= rf.text_field :percentage, maxlength: "5", class: 'form-control'
+              td= submit_tag "Update", class: 'btn btn-primary btn-sm'
+          tr
+            = form_tag multiple_update_admin_rates_path do
+              td Spouse
+              td Non-Tobacco
+              - @non_smoking_spouses_rates.each do |rate|
+                = fields_for "rates[]", rate do |rf|
+                  td= rf.text_field :percentage, maxlength: "5", class: 'form-control'
+              td= submit_tag "Update", class: 'btn btn-primary btn-sm'
+          tr
+            = form_tag multiple_update_admin_rates_path do
+              td Spouse
+              td Tobacco
+              - @smoking_spouses_rates.each do |rate|
+                = fields_for "rates[]", rate do |rf|
+                  td= rf.text_field :percentage, maxlength: "5", class: 'form-control'
+              td= submit_tag "Update", class: 'btn btn-primary btn-sm'
+
+  - if flash[:notice] then
+    .alert.alert-success
+      p#notice= flash[:notice]
+  - elsif flash[:error] then
+    .alert.alert-danger
+      p#error= flash[:error]

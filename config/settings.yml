@@ -1,0 +1,21 @@
+app:
+  name: "Insurance Calculator"
+  scheme: "http"
+  host: ""
+  relative_url_root: "/"
+  full_url: ""
+
+# Overwrite this in production
+secret_token: ''
+
+urn_namespaces:
+- "urn:biola:insurance-calculator:"
+- "urn:biola:apps:all:"
+
+cas:
+  url: "https://login.biola.edu/cas"
+
+webcape:
+  acct:  # set in settings.local.yml
+  pass:  # set in settings.local.yml
+  pin:

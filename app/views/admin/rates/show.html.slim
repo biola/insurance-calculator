@@ -1,0 +1,37 @@
+= render 'admin/dashboard/navbar', page: :rates
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+  h3
+    strong Showing Rate
+
+  .panel.panel-default.slim-panel
+    .panel-body
+      .form-horizontal
+        .form-group
+          = label_tag :min_age, 'Min age', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = text_field_tag :min_age, @rate.min_age, class: 'form-control', disabled: 'true'
+
+        .form-group
+          = label_tag :max_age, 'Max age', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = text_field_tag :max_age, @rate.max_age, class: 'form-control', disabled: 'true'
+
+        .form-group
+          = label_tag :percentage, 'Percentage', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = text_field_tag :percentage, @rate.percentage, class: 'form-control', disabled: 'true'
+
+        .form-group
+          = label_tag :person_type, 'Person type', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = select_tag :person_type, options_for_select([['Employee','Employee'],['Spouse','Spouse']], selected: @rate.person_type), class: 'form-control', disabled: 'true'
+
+        .form-group
+          = label :smoking, 'Smoking', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = select_tag :smoking, options_for_select([['Yes',true],['No',false]], selected: @rate.smoking), class: 'form-control', disabled: 'true'
+
+  = link_to 'Edit', [:edit, :admin, @rate], class: 'btn btn-primary table-button'
+  = link_to 'Back', admin_rates_path, class: 'btn btn-default table-button'
+
+  p id="notice" = notice

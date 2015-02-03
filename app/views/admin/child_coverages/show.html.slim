@@ -1,0 +1,22 @@
+= render 'admin/dashboard/navbar', page: :child_coverages
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+  h3
+    strong Showing Child Coverage
+
+  .panel.panel-default.slim-panel
+    .panel-body
+      .form-horizontal
+        .form-group
+          = label_tag :amount, 'Amount', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = text_field_tag :amount, @child_coverage.amount, class: 'form-control', disabled: 'true'
+        .form-group
+          = label_tag :premium, 'Premium', class: 'col-sm-4 control-label'
+          .col-sm-6
+            = text_field_tag :premium, @child_coverage.premium, class: 'form-control', disabled: 'true'
+
+  = link_to 'Edit', [:edit, :admin, @child_coverage], class: 'btn btn-primary table-button'
+  = link_to 'Back', admin_child_coverages_path, class: 'btn btn-default table-button'
+
+  p id="notice" = notice
+

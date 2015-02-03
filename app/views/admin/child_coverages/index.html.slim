@@ -1,0 +1,28 @@
+= render 'admin/dashboard/navbar', page: :child_coverages
+.col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+  h3
+    strong Listing Child Coverages
+
+  = link_to '+ New Child Coverage', new_admin_child_coverage_path, class: 'btn btn-primary'
+  br
+  br
+  .panel.panel-default.index-panel
+    .panel-body
+      table.table.table-striped
+        thead
+          tr
+            th #
+            th Amount
+            th Premium
+            th colspan="3"
+        tbody
+          - @child_coverages.each_with_index do |child_coverage, index|
+            tr
+              td = index + 1
+              td = child_coverage.amount
+              td = child_coverage.premium
+              td.text-right
+                = link_to 'Show', [:admin, child_coverage], class: 'btn btn-default btn-sm table-button'
+                = link_to 'Edit', [:edit, :admin, child_coverage], class: 'btn btn-primary btn-sm table-button'
+                = link_to 'Destroy', [:admin, child_coverage], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm table-button'
+

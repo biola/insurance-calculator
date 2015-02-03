@@ -1,0 +1,80 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "biola-frontend-toolkit";
+
+html {
+  background: white;
+}
+
+#child_coverage {
+  display: none;
+}
+
+#calc-panel {
+  width: 400px;
+  margin: 15px;
+  background-color: #EAEAEA;
+}
+
+#submit {
+  padding: 0 15px 0 15px;
+}
+#result {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: solid 1px #9F9F9F;
+}
+
+#result h2 {
+  margin: 0;
+  padding: 0;
+}
+
+#notice {
+  margin: 15px;
+  width: 400px;
+}
+
+.table-button {
+  margin: 0 5px;
+}
+
+.small-container {
+  width: 500px;
+}
+
+.multiple-edit .form-control {
+  text-align: right;
+  padding: 0;
+  padding-right: 5px;
+}
+
+.multiple-edit {
+  width: 1050px;
+}
+
+.slim-panel {
+  width: 400px;
+}
+
+.index-panel {
+  width: 1050px;
+}
+
+#calc-button {
+  margin-top: 50px;
+}
