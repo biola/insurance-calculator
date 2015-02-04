@@ -19,6 +19,7 @@ gem 'slim'
 gem 'sqlite3'
 gem 'therubyracer', platforms: :ruby  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'turbolinks'
+gem 'turnout'
 gem 'uglifier', '>= 1.3.0'
 
 
