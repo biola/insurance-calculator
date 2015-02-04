@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.7'
 
 gem 'biola_frontend_toolkit'
+gem 'biola_deploy'
 gem 'blazing'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'humanity'
