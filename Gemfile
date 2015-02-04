@@ -33,3 +33,8 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
 end
+
+group :staging, :production do
+  gem 'mysql2', '~>0.3.11'
+  gem 'rack-ssl'
+end
