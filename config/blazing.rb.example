@@ -1,0 +1,4 @@
+target :'ruby2.staging', '******@ruby2.staging.biola.edu:/srv/rack/insurance-calculator', rails_env: 'staging'
+env_scripts '/etc/profile'
+
+rake :post_deploy, 'RAILS_RELATIVE_URL_ROOT=/'

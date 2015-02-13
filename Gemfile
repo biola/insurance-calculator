@@ -23,6 +23,8 @@ gem 'turnout'
 gem 'uglifier', '>= 1.3.0'
 
 
+gem 'blazing'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
