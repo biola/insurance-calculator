@@ -16,7 +16,7 @@ class CalculatorController < ApplicationController
     if ( params[:age_range].blank? || params[:person_type].blank? ||
          params[:smoking].blank? || params[:coverage].blank? )
       flash[:notice] = "Please make your selections before submitting."
-      redirect_to '/calculator'
+      redirect_to calculator_path
     else
       age_range = params[:age_range].split('-')
       rate = Rate.where(person_type: params[:person_type],
