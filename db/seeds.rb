@@ -62,7 +62,14 @@ rates = [
 
 rates.each { |rate| Rate.create(rate) }
 
-
 coverages = (1..30).map { |i| i * 10000 }
-
 coverages.each { |coverage| Coverage.create(amount: coverage)}
+
+child_coverages =
+  [{ amount: 2500, premium: 0.36 },
+   { amount: 5000, premium: 0.54 },
+   { amount: 7500, premium: 0.75 },
+   { amount: 10000, premium: 0.90 }]
+
+child_coverages.each { |cov| ChildCoverage.create(cov) }
+
