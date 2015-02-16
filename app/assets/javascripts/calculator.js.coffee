@@ -1,5 +1,6 @@
 ready = ->
   $('#person_type').change ->
+    $('#notice').hide()
     person_type = $('#person_type :selected').text()
     if person_type == 'Child'
       $('#child_coverage').show()
