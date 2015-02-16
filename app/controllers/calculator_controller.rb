@@ -30,6 +30,5 @@ class CalculatorController < ApplicationController
 
   def allow_from_bannertest
     response.headers['X-Frame-Options'] = 'ALLOW-FROM https://bannertest.biola.edu'
-
   end
 end

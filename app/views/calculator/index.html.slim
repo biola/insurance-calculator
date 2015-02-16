@@ -2,21 +2,21 @@
   .panel-body
     = form_tag calculator_path, method: 'POST', class: 'form-horizontal'
       .form-group
-        = label_tag :person_type, 'Person Type: ', class: 'col-sm-4 control-label'
-        #field.col-sm-8
+        = label_tag :person_type, 'Person Type: ', class: 'col-xs-4 control-label'
+        #field.col-xs-8
           = select_tag(:person_type, options_for_select(@person_types, params[:person_type]), {include_blank: true, class: 'form-control'})
       #field_group
         .form-group
-          = label_tag :coverage, 'Coverage Amount: ', class: 'col-sm-4 control-label'
-          #field.col-sm-8
+          = label_tag :coverage, 'Coverage Amount: ', class: 'col-xs-4 control-label'
+          #field.col-xs-8
             = select_tag(:coverage, options_for_select(@coverages.map { |cov| [number_to_currency(cov.amount, precision: 0), cov.amount] }, params[:coverage]), {include_blank: true, class: 'form-control'})
         .form-group
-          = label_tag :age_range, 'Age Range: ', class: 'col-sm-4 control-label'
-          #field.col-sm-8
+          = label_tag :age_range, 'Age Range: ', class: 'col-xs-4 control-label'
+          #field.col-xs-8
             = select_tag(:age_range, options_for_select(@age_ranges, params[:age_range]), {include_blank: true, class: 'form-control'})
         .form-group
-          = label_tag :smoking, 'Smoking? ', class: 'col-sm-4 control-label'
-          #field.col-sm-8
+          = label_tag :smoking, 'Smoking? ', class: 'col-xs-4 control-label'
+          #field.col-xs-8
             = select_tag(:smoking, options_for_select({ No: false, Yes: true }, params[:smoking]), {include_blank: true, class: 'form-control'})
         #submit.form-group
           =button_tag(class: 'btn btn-primary btn-lg pull-right') do
