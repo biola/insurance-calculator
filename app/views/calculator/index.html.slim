@@ -36,7 +36,7 @@
           - @child_coverages.each do |child_coverage|
             tr
               td= number_to_currency(child_coverage.amount, precision: 0)
-              td= child_coverage.premium
+              td= number_to_currency(child_coverage.premium, precision: 2)
 
 - if notice.present?
   #notice.alert.alert-danger= notice
