@@ -29,6 +29,6 @@ class CalculatorController < ApplicationController
   end
 
   def allow_from_bannertest
-    response.headers['X-Frame-Options'] = 'ALLOW-FROM https://bannertest.biola.edu'
+    response.headers['X-Frame-Options'] = "ALLOW-FROM #{Settings.banner_app.url}"
   end
 end

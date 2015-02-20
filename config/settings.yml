@@ -15,7 +15,5 @@ urn_namespaces:
 cas:
   url: "https://login.biola.edu/cas"
 
-webcape:
-  acct:  # set in settings.local.yml
-  pass:  # set in settings.local.yml
-  pin:
+banner_app:
+  url: "https://bannertest.biola.edu"
