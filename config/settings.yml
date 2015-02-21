@@ -1,9 +1,9 @@
 app:
   name: "Insurance Calculator"
   scheme: "http"
-  host: ""
+  host: "localhost:3000"
   relative_url_root: "/"
-  full_url: ""
+  full_url: "http://localhost:3000/"
 
 # Overwrite this in production
 secret_token: ''

@@ -1,2 +1,6 @@
 banner_app:
   url: "https://banner.biola.edu"
+app:
+  host: "apps.biola.edu"
+  relative_url_root: "/insurance-calculator"
+  full_url: "https://apps.biola.edu/insurance-calculator"

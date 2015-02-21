@@ -19,7 +19,7 @@
             strong Child Coverages
           end
       .text-center
-        = link_to('#', onclick: 'javascript:window.open("/", "_blank", "scrollbars=0,resizable=0,toolbar=0,menubar=0,height=550,width=430")', title: 'Insurance Calculator', class: "btn btn-default", id: "calc-button") do
+        = link_to('#', onclick: "javascript:window.open('#{Settings.app.full_url}', '_blank', 'scrollbars=0,resizable=0,toolbar=0,menubar=0,height=550,width=430')", title: 'Insurance Calculator', class: "btn btn-default", id: "calc-button") do
           strong Open Calculator
           | &nbsp; &nbsp;
           i class="fa fa-calculator"
