@@ -5,4 +5,4 @@ target :'ruby6b.prod', '******@ruby6b.prod.biola.edu:/srv/rack/insurance-calcula
 calculator', rails_env: 'staging'
 env_scripts '/etc/profile'
 
-rake :post_deploy, 'RAILS_RELATIVE_URL_ROOT=/'
+rake :post_deploy, 'RAILS_RELATIVE_URL_ROOT=/insurance-calculator'
