@@ -101,6 +101,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    puma (2.14.0)
     pundit (0.3.0)
       activesupport (>= 3.0.0)
     rack (1.5.2)
@@ -208,6 +209,7 @@ DEPENDENCIES
   jquery-rails (~> 3.1.3)
   mysql2 (~> 0.3.11)
   pry
+  puma
   pundit
   rack-cas
   rack-ssl
@@ -223,3 +225,6 @@ DEPENDENCIES
   turbolinks
   turnout
   uglifier (>= 1.3.0)
+
+BUNDLED WITH
+   1.10.6
