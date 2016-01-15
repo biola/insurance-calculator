@@ -11,7 +11,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails', '~> 3.1.3'
 gem 'puma'
 gem 'pundit'
-gem 'rack-cas'
+gem 'rack-cas', '>= 0.12.0'
 gem 'rails_config'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -35,6 +35,6 @@ group :development, :test do
 end
 
 group :staging, :production do
-  gem 'mysql2', '~>0.3.11'
+  gem 'mysql2', '~> 0.3.11'
   gem 'rack-ssl'
 end
