@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def authenticate!
-    authentication.perform or render_error_page(401)
+    authentication.perform || render_error_page(401)
   end
 
   def authentication
@@ -23,7 +23,10 @@ class ApplicationController < ActionController::Base
   end
 
   def render_error_page(status)
-    render file: "#{Rails.root}/public/#{status}", formats: [:html], status: status, layout: false
+    render file: "#{Rails.root}/public/#{status}",
+           formats: [:html],
+           status: status,
+           layout: false
   end
 
   def user_not_authorized

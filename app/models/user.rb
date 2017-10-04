@@ -1,6 +1,6 @@
-class User < ActiveRecord::Base  
+class User < ActiveRecord::Base
   include Humanity::Base
-  
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -20,5 +20,5 @@ class User < ActiveRecord::Base
 
   def authorized_roles
     roles & Authorization::Engine.instance.roles.map(&:to_s)
-  end  
+  end
 end

@@ -1,9 +1,8 @@
 class UserPolicy < ApplicationPolicy
   class Scope < Struct.new(:user, :scope)
     def resolve
-      if user.admin?
-        scope.all
-      end
+      return unless user.admin?
+      scope.all
     end
   end
 
@@ -11,5 +10,5 @@ class UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  alias :show? :index?
+  alias show? index?
 end

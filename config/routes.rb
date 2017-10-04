@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'calculator' => 'calculator#index'
   post 'calculator' => 'calculator#index'
 
@@ -20,5 +19,4 @@ Rails.application.routes.draw do
   get '/logout' => -> env { [200, { 'Content-Type' => 'text/html' }, ['Rack::CAS should have caught this']] }, as: :logout
 
   root 'calculator#index'
-
 end

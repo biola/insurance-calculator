@@ -3,7 +3,7 @@ class CalculatorController < ApplicationController
 
   def index
     @coverages = Coverage.all.ordered_asc
-    @person_types = { Employee: "Employee", Spouse: "Spouse", Child: "Child"}
+    @person_types = { Employee: 'Employee', Spouse: 'Spouse', Child: 'Child'}
     @age_ranges = Rate.all_age_ranges
     @result = calculate if params[:coverage] && params[:person_type] &&
                            params[:age_range] && params[:smoking]
@@ -13,9 +13,9 @@ class CalculatorController < ApplicationController
   private
 
   def calculate
-    if ( params[:age_range].blank? || params[:person_type].blank? ||
-         params[:smoking].blank? || params[:coverage].blank? )
-      flash[:notice] = "Please make your selections before submitting."
+    if params[:age_range].blank? || params[:person_type].blank? ||
+       params[:smoking].blank? || params[:coverage].blank?
+      flash[:notice] = 'Please make your selections before submitting.'
       redirect_to calculator_path
     else
       age_range = params[:age_range].split('-')
@@ -24,11 +24,12 @@ class CalculatorController < ApplicationController
                         max_age: age_range[1],
                         smoking: params[:smoking] == 'true').first
       percentage = rate.percentage
-      (( params[:coverage].to_f / 10000 ) * percentage / 2 ).round(2)
+      ((params[:coverage].to_f / 10_000) * percentage / 2).round(2)
     end
   end
 
   def allow_from_bannertest
-    response.headers['X-Frame-Options'] = "ALLOW-FROM #{Settings.banner_app.url}"
+    response.headers['X-Frame-Options'] =
+      "ALLOW-FROM #{Settings.banner_app.url}"
   end
 end

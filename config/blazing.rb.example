@@ -1,8 +1,0 @@
-target :'ruby2.staging', '******@ruby2.staging.biola.edu:/srv/rack/insurance-
-target :'ruby6a.prod', '******@ruby6a.prod.biola.edu:/srv/rack/insurance-calculator', rails_env: 'production'
-target :'ruby6b.prod', '******@ruby6b.prod.biola.edu:/srv/rack/insurance-calculator', rails_env: 'production'
-
-calculator', rails_env: 'staging'
-env_scripts '/etc/profile'
-
-rake :post_deploy, 'RAILS_RELATIVE_URL_ROOT=/insurance-calculator'

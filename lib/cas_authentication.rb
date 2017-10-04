@@ -1,32 +1,40 @@
+##
+# Authenticate User and Create Session
 class CasAuthentication
   def initialize(session)
     @session = session
   end
 
   def user
-    if username.present?
-      @user ||= User.find_or_initialize_by(username: username)
-    end
+    return unless username.present?
+    @user ||= User.find_or_initialize_by(username: username)
   end
 
   def perform
-    if authenticated?
-      true
-    elsif present?
-      if new_user?
-        if create_user!
-          authenticate!
-        end
-      elsif unauthenticated?
-        authenticate!
-        update_extra_attributes!
-      end
+    return true if authenticated?
+    return unless session['cas'].present?
+
+    if new_user?
+      authenticate! if create_user!
+    elsif unauthenticated?
+      authenticate!
+      update_extra_attributes!
     end
   end
 
   private
 
   attr_reader :session
+
+  USER_CAS_MAP = {
+    employeeId: { biola_id: Integer },
+    eduPersonNickname: :first_name,
+    sn: :last_name,
+    mail: :email,
+    url: :photo_url,
+    eduPersonEntitlement: { entitlements: Array },
+    eduPersonAffiliation: { affiliations: Array }
+  }.freeze
 
   def present?
     session['cas'].present?
@@ -49,58 +57,37 @@ class CasAuthentication
   end
 
   def update_extra_attributes!
-    cas_attr = HashWithIndifferentAccess.new(extra_attributes)
+    USER_CAS_MAP.each do |attr_key, opt|
+      next unless extra_attrs.key?(attr_key)
+      key, type = user_key_type(opt)
+      user[key] = attr_value(extra_attrs[attr_key], type)
+    end
 
-    entitlements = urns_to_roles(cas_attr[:eduPersonEntitlement] || {}, Settings.urn_namespaces)
-    
-    user.biola_id     = extra_attr(:employeeId)                     if extra_attr_has_key?(:employeeId)
-    user.first_name   = extra_attr(:eduPersonNickname)              if extra_attr_has_key?(:eduPersonNickname)
-    user.last_name    = extra_attr(:sn)                             if extra_attr_has_key?(:sn)
-    user.email        = extra_attr(:mail)                           if extra_attr_has_key?(:mail)
-    user.photo_url    = extra_attr(:url).gsub('.jpg', '_large.jpg') if extra_attr_has_key?(:url)
-    #user.entitlements = extra_attrs(:eduPersonEntitlement)          if extra_attr_has_key?(:eduPersonEntitlement)
-    #user.affiliations = extra_attrs(:eduPersonAffiliation)          if extra_attr_has_key?(:eduPersonAffiliation)
-    user.update_roles!(extra_attrs(:eduPersonEntitlement),"entitlements")
-    user.update_roles!(extra_attrs(:eduPersonAffiliation),"affiliations")
-    user.save \
-    && user.update_roles!(cas_attr[:eduPersonAffiliation] || {}, :affiliation) \
-    && user.update_roles!(entitlements, :entitlement)
+    user.save
   end
-  alias :create_user! :update_extra_attributes!
+  alias create_user! update_extra_attributes!
 
   def username
-    session[:username] || attrs['user']
+    (session[:username] || attrs[:user]).downcase
   end
 
   def attrs
-    @attrs ||= (session['cas'] || {}).with_indifferent_access
+    @attrs ||= (session[:cas] || {}).with_indifferent_access
   end
 
-  def extra_attributes
-    @extra_attributes ||= (attrs['extra_attributes'] || {}).with_indifferent_access
+  def extra_attrs
+    @extra_attrs ||= (attrs[:extra_attributes] || {}).with_indifferent_access
   end
 
-  def extra_attr_has_key?(key)
-    extra_attributes.has_key? key
+  def attr_value(value, type = nil)
+    return Array(value).compact if type == Array
+    return Integer(value) if type == Integer &&
+                             /\A\d+\z/ =~ value.to_s
+    String(value)
   end
 
-  def extra_attr(key)
-    # Many values come back as arrays but don't really need to be
-    extra_attrs(key).first
-  end
-
-  def extra_attrs(key)
-    Array(extra_attributes[key]).map(&:to_s)
-  end
-
-  def urns_to_roles(urns, nids)
-    clean_urns = urns.map { |e| e.gsub(/^urn:/i, '') }
-    clean_nids = nids.map { |n| n.gsub(/^urn:/i, '') }
-
-    clean_urns.map { |urn|
-      clean_nids.map { |nid|
-        urn[0...nid.length] == nid ? urn[nid.length..urn.length] : nil
-      }
-    }.flatten.compact
+  def user_key_type(opt)
+    return opt if opt.is_a? Symbol
+    opt.first
   end
 end

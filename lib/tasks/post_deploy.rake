@@ -1,5 +1,5 @@
 desc 'Run all deployment rake tasks'
-task :post_deploy => [
+task post_deploy: [
   'maintenance:start',
   'deploy:chef_client',
   'deploy:migrate_db',
