@@ -13,7 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20150114235200) do
 
-  create_table "assignments", force: true do |t|
+  create_table "assignments", force: :cascade do |t|
     t.integer "human_id"
     t.string  "human_type"
     t.integer "role_id",    null: false
@@ -25,20 +25,20 @@ ActiveRecord::Schema.define(version: 20150114235200) do
   add_index "assignments", ["role_id"], name: "index_assignments_on_role_id"
   add_index "assignments", ["source"], name: "index_assignments_on_source"
 
-  create_table "child_coverages", force: true do |t|
+  create_table "child_coverages", force: :cascade do |t|
     t.integer  "amount"
     t.decimal  "premium",    precision: 4, scale: 2
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "coverages", force: true do |t|
+  create_table "coverages", force: :cascade do |t|
     t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "rates", force: true do |t|
+  create_table "rates", force: :cascade do |t|
     t.integer  "min_age"
     t.integer  "max_age"
     t.decimal  "percentage",  precision: 4, scale: 2
@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(version: 20150114235200) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
+  create_table "roles", force: :cascade do |t|
     t.string "name", null: false
   end
 
   add_index "roles", ["name"], name: "index_roles_on_name"
 
-  create_table "sessions", force: true do |t|
+  create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.string   "cas_ticket"
     t.text     "data"
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 20150114235200) do
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "first_name"
     t.string   "last_name"
